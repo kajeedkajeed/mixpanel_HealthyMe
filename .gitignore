@@ -1,0 +1,21 @@
+build
+dist
+node_modules
+.env.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# editor
+.idea
+.vscode
+.DS_Store
+
+# TypeScript
+*.tsbuildinfo
+
+#sonarqube
+sonar-project.properties
+.scannerwork
+coverage

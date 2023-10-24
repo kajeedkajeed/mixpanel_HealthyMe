@@ -36,6 +36,8 @@ const AppContext = React.createContext()
 const AppProvider = ({ children }) => {
 
     /*AUTH0*/
+    const [isAuthenticatedTwo, setIsAuthenticatedTwo] = useState(false);
+    const [currentUser, setCurrentUser] = useState();
     const {isAuthenticated, loginWithRedirect, logout, user} = useAuth0();
     if(isAuthenticated){
         //console.log(user.name)
@@ -47,6 +49,11 @@ const AppProvider = ({ children }) => {
     useEffect(()=>{
        setMyUser(user) 
     },[user])
+
+    const generateCurrentUser = (email) => {
+      console.log('generateCurrentUser >>> ', email);
+      setCurrentUser(email);
+    }
 
 
     /*NAVBAR FUNCTIONALITY*/
@@ -188,6 +195,8 @@ const AppProvider = ({ children }) => {
             emptyCart,
             user,
             myUser,
+            generateCurrentUser,
+            currentUser,
         }}>
         {children}
     </AppContext.Provider>

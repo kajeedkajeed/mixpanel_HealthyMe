@@ -60,6 +60,7 @@
 .sign-up-text {
   color: blue;
   margin: 0 16px;
+  font-weight: bold;
 }
 
 .close-modal {
@@ -67,4 +68,8 @@
   top: 0;
   right: 0;
   padding: 24px;
+}
+
+.sub-title {
+  text-transform: none;
 }

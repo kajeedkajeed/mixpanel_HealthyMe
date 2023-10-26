@@ -38,9 +38,9 @@ const LoginContainer = (props) => {
         <div className="wrapper">
         <div className="login-container">
           <div className="close-modal" onClick={handleCloseModel}>x</div>
-          <h3>Welcome</h3>
-          <div>
-            <span>Log in to HealthyMe Account</span>
+          <h3>Welcome !</h3>
+          <div className="sub-title">
+            <span>Login to Checkout HealthyMe </span>
           </div>
           <FormProvider {...formMethods}>
             <form className="form-wrapper" onSubmit={handleSubmit(onSubmit)}>
@@ -51,7 +51,7 @@ const LoginContainer = (props) => {
               <Button className="mui-button" type="submit" variant="contained">LOG IN</Button>
             </form>
           </FormProvider>
-          <div className="sign-up-container">Don't have an account? <div className="sign-up-text">Sign up</div></div>
+          <div className="sign-up-container sub-title">Don't have an account? <div className="sign-up-text">Sign up</div></div>
         </div>
       </div>
       </Modal>

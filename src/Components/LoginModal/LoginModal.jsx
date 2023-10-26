@@ -36,9 +36,9 @@ const LoginContainer = (props) => {
       >
         <div className="wrapper">
         <div className="login-container">
-          <h3>Welcome</h3>
+          <h3>Welcome !</h3>
           <div>
-            <span>Log in to HealthyMe</span>
+            <span>Log in to HealthyMe Account</span>
           </div>
           <FormProvider {...formMethods}>
               <form className="form-wrapper" onSubmit={handleSubmit(onSubmit)}>

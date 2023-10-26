@@ -21,6 +21,7 @@ const LoginContainer = (props) => {
   }
 
   const handleCloseModel = () => {
+    console.log('close model');
     handleClose();
   }
 
@@ -36,18 +37,19 @@ const LoginContainer = (props) => {
       >
         <div className="wrapper">
         <div className="login-container">
+          <div className="close-modal" onClick={handleCloseModel}>x</div>
           <h3>Welcome</h3>
           <div>
             <span>Log in to HealthyMe</span>
           </div>
           <FormProvider {...formMethods}>
-              <form className="form-wrapper" onSubmit={handleSubmit(onSubmit)}>
-                <div className="form-container">
-                  <TextField className="mui-TextField" type="text" label="Email" variant="outlined" name="Email" {...register('email')}/>
-                  <TextField className="mui-TextField" type="password" label="password" variant="outlined" name="password" {...register('password')}/>
-                </div>
-                <Button className="mui-button" type="submit" variant="contained">LOG IN</Button>
-              </form>
+            <form className="form-wrapper" onSubmit={handleSubmit(onSubmit)}>
+              <div className="form-container">
+                <TextField className="mui-TextField" type="text" label="Email" variant="outlined" name="Email" {...register('email')}/>
+                <TextField className="mui-TextField" type="password" label="password" variant="outlined" name="password" {...register('password')}/>
+              </div>
+              <Button className="mui-button" type="submit" variant="contained">LOG IN</Button>
+            </form>
           </FormProvider>
           <div className="sign-up-container">Don't have an account? <div className="sign-up-text">Sign up</div></div>
         </div>

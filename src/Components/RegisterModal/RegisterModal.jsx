@@ -3,7 +3,7 @@ import { AppContext } from '../Context'
 import { Modal } from '@mui/material'
 import { useNavigate } from 'react-router-dom';
 import '../LoginModal/LoginModal.css'
-import { TextField, Button } from '@mui/material';
+import { TextField, Button, InputLabel, MenuItem, FormControl, Select } from '@mui/material';
 import { useForm, FormProvider } from "react-hook-form";
 import { useEffect } from 'react';
 
@@ -12,7 +12,7 @@ const RegisterModal = (props) => {
   const { open, handleClose, handleLogin } = props;
   const navigate = useNavigate();
   const formMethods = useForm();
-  const { register, handleSubmit } = formMethods;
+  const { register, handleSubmit, setValue } = formMethods;
 
   const onSubmit = (data) => {
     console.log('register >>> ', data);
@@ -22,6 +22,11 @@ const RegisterModal = (props) => {
   const handleCloseModel = () => {
     handleClose();
   }
+
+  const handleChange = (event) => {
+    console.log(event.target.value);
+    setValue('registerGender', event.target.value);
+  };
 
   return (
     <div>
@@ -39,7 +44,21 @@ const RegisterModal = (props) => {
                 <TextField className="mui-TextField" type="text" label="Email" variant="outlined" name="Email" {...register('registerEmail')}/>
                 <TextField className="mui-TextField" type="password" label="password" variant="outlined" name="password" {...register('registerPassword')}/>
                 <TextField className="mui-TextField" type="number" label="Phone" variant="outlined" name="phone" {...register('registerPhone')}/>
-                <TextField className="mui-TextField" type="text" label="gender" variant="outlined" name="gender" {...register('registerGender')}/>
+                {/* <TextField className="mui-TextField" type="text" label="gender" variant="outlined" name="gender" {...register('registerGender')}/> */}
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Gender</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    label="Gender"
+                    {...register('registerGender')}
+                    onChange={handleChange}
+                  >
+                    <MenuItem value="Male">Male</MenuItem>
+                    <MenuItem value="Female">Female</MenuItem>
+                    <MenuItem value="Other">Other</MenuItem>
+                  </Select>
+                </FormControl>
               </div>
               <Button className="mui-button" type="submit" variant="contained">Register</Button>
             </form>

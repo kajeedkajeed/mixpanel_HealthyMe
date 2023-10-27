@@ -2,31 +2,26 @@ import React, { useContext, useState } from 'react'
 import { AppContext } from '../Context'
 import { Modal } from '@mui/material'
 import { useNavigate } from 'react-router-dom';
-import './loginModal.css';
+import '../LoginModal/LoginModal.css'
 import { TextField, Button } from '@mui/material';
 import { useForm, FormProvider } from "react-hook-form";
 import { useEffect } from 'react';
 
-const LoginContainer = (props) => {
+const RegisterModal = (props) => {
   // eslint-disable-next-line react/prop-types
-  const { open, handleClose, handleSignUp } = props;
-  const { total_amount, total_items, loginWithRedirect, user, logout, generateCurrentUser, currentUser } = useContext(AppContext);
+  const { open, handleClose, handleLogin } = props;
   const navigate = useNavigate();
   const formMethods = useForm();
   const { register, handleSubmit } = formMethods;
 
   const onSubmit = (data) => {
-    console.log('on submit >>> ', data);
-    generateCurrentUser(data.email);
+    console.log('register >>> ', data);
+    handleLogin();
   }
 
   const handleCloseModel = () => {
     handleClose();
   }
-
-  useEffect(() => {
-    console.log('currentUser >>> ', currentUser);
-  }, [currentUser]);
 
   return (
     <div>
@@ -37,20 +32,18 @@ const LoginContainer = (props) => {
         <div className="wrapper">
         <div className="login-container">
           <div className="close-modal" onClick={handleCloseModel}>x</div>
-          <h3>Welcome !</h3>
-          <div className="sub-title">
-            <span>Login to Checkout HealthyMe </span>
-          </div>
+          <h3>Sign up</h3>
           <FormProvider {...formMethods}>
             <form className="form-wrapper" onSubmit={handleSubmit(onSubmit)}>
               <div className="form-container">
-                <TextField className="mui-TextField" type="text" label="Email" variant="outlined" name="Email" {...register('email')}/>
-                <TextField className="mui-TextField" type="password" label="password" variant="outlined" name="password" {...register('password')}/>
+                <TextField className="mui-TextField" type="text" label="Email" variant="outlined" name="Email" {...register('registerEmail')}/>
+                <TextField className="mui-TextField" type="password" label="password" variant="outlined" name="password" {...register('registerPassword')}/>
+                <TextField className="mui-TextField" type="number" label="Phone" variant="outlined" name="phone" {...register('registerPhone')}/>
+                <TextField className="mui-TextField" type="text" label="gender" variant="outlined" name="gender" {...register('registerGender')}/>
               </div>
-              <Button className="mui-button" type="submit" variant="contained">LOG IN</Button>
+              <Button className="mui-button" type="submit" variant="contained">Register</Button>
             </form>
           </FormProvider>
-          <div className="sign-up-container sub-title">Don't have an account? <div className="sign-up-text" onClick={handleSignUp}>Sign up</div></div>
         </div>
       </div>
       </Modal>
@@ -59,4 +52,4 @@ const LoginContainer = (props) => {
   )
 }
 
-export default LoginContainer
+export default RegisterModal

@@ -9,7 +9,7 @@ import RegisterModal from './RegisterModal/RegisterModal';
 import { Mixpanel } from '../mixpanel';
 
 const CartTotal = () => {
-  const { total_amount, total_items, loginWithRedirect, user, logout } = useContext(AppContext);
+  const { total_amount, total_items, loginWithRedirect, currentUser, logout } = useContext(AppContext);
   const [openModal, setOpenModal] = useState(false);
   const [openRegisterModal, setOpenRegisterModal] = useState(false);
 
@@ -58,7 +58,7 @@ const CartTotal = () => {
         <p>Billing</p>
         <h4>Total Items: {total_items}</h4>
         <h3>Order Total: &#8377; {total_amount}</h3>
-        {user ?
+        {currentUser ?
           <div className='btn-logout'>
             <Link to='/checkout'>
               <button className='btn-checkout btn-pymnt'>Checkout</button>

@@ -1,9 +1,8 @@
 import React, { useContext, useState } from 'react'
 import { AppContext } from '../Context'
-import { Modal } from '@mui/material'
+import { Modal, TextField, Button } from '@mui/material'
 import { useNavigate } from 'react-router-dom';
 import './loginModal.css';
-import { TextField, Button } from '@mui/material';
 import { useForm, FormProvider } from "react-hook-form";
 import { useEffect } from 'react';
 import { Mixpanel } from '../../mixpanel';
@@ -34,6 +33,8 @@ const LoginContainer = (props) => {
         login_method: 'Email',
       }
     );
+
+    handleClose();
 
   }
 

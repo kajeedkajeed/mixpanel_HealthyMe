@@ -49,18 +49,17 @@ const Filters = () => {
 
     return (
         <section className='filter-section'>
-            <span>
-                <img src={meal1} alt="meal1" />
-                <div className='meal-title'>
+            <div style={{ background: 'red', width: '100%', display: 'flex', justifyContent: 'center' }}>
+                <img style={{ width: '100%', minHeight: 450 }} src={meal1} alt="meal1" />
+                <div style={{ position: 'absolute', left: 'calc(50% - 60px)', top: '150px' }} className="meal-title">
                     Meals
                 </div>
-            </span>
+            </div>
 
-
-            <div className='meal-search-bar search-container'>
-                <form className='input-bar'>
-                    <input type="text" onChange={handleOnChange} placeholder='Search Your Favourite Meals' />
-                    <span className=' bi bi-search' onClick={handleOnClick}></span>
+            <div className='meal-search-bar' style={{ height: '100px', display: 'flex', justifyContent: 'center', marginTop: 50 }}>
+                <form>
+                    <input style={{ borderRadius: '15px' }} type="text" onChange={handleOnChange} placeholder='Search Your Favourite Meals' />
+                    <span style={{ marginLeft: 10 }} className='bi bi-search' onClick={handleOnClick}></span>
                 </form>
             </div>
 

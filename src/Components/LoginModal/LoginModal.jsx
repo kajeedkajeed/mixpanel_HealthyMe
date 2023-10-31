@@ -18,6 +18,15 @@ const LoginContainer = (props) => {
   const onSubmit = (data) => {
     console.log('on submit >>> ', data);
     generateCurrentUser(data.email);
+
+    /* 
+    mixpanel
+    --------
+     - mixpanel identify
+     - mixpanel.people.set
+     - mixpanel track >>> login_method
+    */
+
   }
 
   const handleCloseModel = () => {

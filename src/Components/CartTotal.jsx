@@ -29,6 +29,11 @@ const CartTotal = () => {
     console.log('handleSignUp >>>> ');
     setOpenRegisterModal(true);
     setOpenModal(false);
+
+    /**
+     * mixpanel
+     * mixpanel track >>> page_name
+     */
   }
 
   return (

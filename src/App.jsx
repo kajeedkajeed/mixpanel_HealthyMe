@@ -22,6 +22,13 @@ import Error from './Pages/Error'
 
 function App() {
 
+  useEffect(() => {
+    /**
+     * mixpanel - global properties
+     * mixpanel.register >>> platform / user_location
+     */
+  }, [])
+
   return (
     <AuthWrapper>
       <Router>

@@ -6,6 +6,7 @@ import { Modal } from '@mui/material'
 import { Link, useNavigate } from 'react-router-dom';
 import LoginContainer from './LoginModal/LoginModal';
 import RegisterModal from './RegisterModal/RegisterModal';
+import { Mixpanel } from '../mixpanel';
 
 const CartTotal = () => {
   const { total_amount, total_items, loginWithRedirect, user, logout } = useContext(AppContext);
@@ -15,6 +16,13 @@ const CartTotal = () => {
   const handleGoToLogin = () => {
     setOpenModal(true);
     setOpenRegisterModal(false);
+
+    Mixpanel.track(
+      'login_started',
+      {
+        page_name: 'Cart',
+      }
+    );
   }
 
   const handleClose = () => {
@@ -34,6 +42,14 @@ const CartTotal = () => {
      * mixpanel
      * mixpanel track >>> page_name
      */
+
+     Mixpanel.track(
+      'sign_up_started',
+      {
+        'page_name': 'Cart',
+      }
+   );
+
   }
 
   return (

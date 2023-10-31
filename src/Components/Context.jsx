@@ -4,7 +4,7 @@ import axios from "axios";
 import { meals_URL as url } from "../../Utils/constants";
 import { search_Meals_URL as URI } from "../../Utils/constants";
 import { useAuth0 } from "@auth0/auth0-react";
-
+import { allMeals } from "../constants";
 
 
 /*TO INITALIZE CART STATE*/
@@ -70,32 +70,43 @@ const AppProvider = ({ children }) => {
     /*FETCH MEALS*/
     const fetchMeals = async (url) => {
         try {
-            const response = await axios(url);
-            const data = response.data;
+            // const response = await axios(url);
+            // const data = response.data;
+            const data = allMeals;
             dispatch({ type: 'GET_MEALS', payload: data })
         } catch (error) {
             console.log(error)
         }
     }
 
-    const fetchMealsBySearch = async (URI) => {
-        try {
-            const response = await axios(URI);
-            const data = response.data;
-            dispatch({ type: 'FETCH_SEARCH_MEALS', payload: data })
-        } catch (error) {
-            console.log(error)
-        }
+    const fetchMealsBySearch = (search) => {
+        // try {
+        //     // const response = await axios(URI);
+        //     // const data = response.data;
+        //     const data = allMeals
+        //     dispatch({ type: 'FETCH_SEARCH_MEALS', payload: data })
+        // } catch (error) {
+        //     console.log(error)
+        // }
+        const data = allMeals.filter((item) => {
+            const titleLowerCase = item.title.toLowerCase();
+            return titleLowerCase.indexOf(search.toLowerCase()) >= 0
+        });
+        dispatch({ type: 'FETCH_SEARCH_MEALS', payload: data })
     }
 
-    const fetchSelectMeal = async (url) => {
-        try {
-            const response = await axios(url);
-            const data = response.data;
-            dispatch({ type: 'GET_SELECT_MEAL', payload: data })
-        } catch (error) {
-            console.log(error)
-        }
+    const fetchSelectMeal = (id) => {
+        // try {
+        //     console.log('fetchSelectMeal url >>>> ', url);
+        //     const response = await axios(url);
+        //     const data = response.data;
+        //     dispatch({ type: 'GET_SELECT_MEAL', payload: data })
+        // } catch (error) {
+        //     console.log(error)
+        // }
+
+        const data = allMeals.find((item) => item._id === id);
+        dispatch({ type: 'GET_SELECT_MEAL', payload: data })
     }
 
 
@@ -105,15 +116,15 @@ const AppProvider = ({ children }) => {
         dispatch({ type: 'UPDATE_SORT', payload: value })
     }
 
-    const updateSelect = (e) => {
-        const value = e.target.value;
-        dispatch({ type: 'UPDATE_SELECT', payload: value })
+    const updateSelect = (type) => {
+        // const value = e.target.value;
+        dispatch({ type: 'UPDATE_SELECT', payload: type })
     }
 
     /*SEARCHING*/
-    const searchByName = (e) => {
-        const value = e.target.value;
-        dispatch({ type: 'SEARCH_BY_NAME', payload: value })
+    const searchByName = (str) => {
+        // const value = e.target.value;
+        dispatch({ type: 'SEARCH_BY_NAME', payload: str })
     }
 
 
@@ -167,7 +178,7 @@ const AppProvider = ({ children }) => {
     }, [state.sort])
 
     useEffect(() => {
-        fetchMealsBySearch(`${URI}${state.text}`);
+        fetchMealsBySearch(state.text);
         //dispatch({type: 'GET_SEARCH_MEALS'})
     }, [state.text])
 

@@ -19,6 +19,7 @@ import ProtectedRoute from './Components/ProtectedRoute'
 import AuthWrapper from './Components/AuthWrapper'
 import PaymentSuccess from './Components/PaymentSuccessfull'
 import Error from './Pages/Error'
+import { Mixpanel } from './mixpanel';
 
 function App() {
 
@@ -27,6 +28,11 @@ function App() {
      * mixpanel - global properties
      * mixpanel.register >>> platform / user_location
      */
+
+    Mixpanel.register({
+      'platform': 'Web',
+      'user_location': '13.7218203,100.5633786',
+    });
   }, [])
 
   return (

@@ -6,6 +6,7 @@ import './loginModal.css';
 import { TextField, Button } from '@mui/material';
 import { useForm, FormProvider } from "react-hook-form";
 import { useEffect } from 'react';
+import { Mixpanel } from '../../mixpanel';
 
 const LoginContainer = (props) => {
   // eslint-disable-next-line react/prop-types
@@ -26,6 +27,13 @@ const LoginContainer = (props) => {
      - mixpanel.people.set
      - mixpanel track >>> login_method
     */
+    Mixpanel.identify(data.email);
+    Mixpanel.track(
+      'login_completed',
+      {
+        login_method: 'Email',
+      }
+    );
 
   }
 
@@ -57,10 +65,14 @@ const LoginContainer = (props) => {
                 <TextField className="mui-TextField" type="password" label="password" variant="outlined" name="password" {...register('password')}/>
               </div>
               <Button className="mui-button" type="submit" variant="contained">LOG IN</Button>
+            
+
             </form>
           </FormProvider>
           <div className="sign-up-container sub-title">Don't have an account? <div className="sign-up-text" onClick={handleSignUp}>Sign up</div></div>
         </div>
+
+        
       </div>
       </Modal>
     </div>

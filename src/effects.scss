@@ -313,6 +313,11 @@ nav {
         font-family: $PrimaryFont;
     }
 
+    .search-container {
+        display: flex;
+        flex-direction: row;
+    }
+
     .meal-search-bar {
         input {
             width: 500px;

@@ -6,6 +6,11 @@ import '../LoginModal/LoginModal.css'
 import { TextField, Button, InputLabel, MenuItem, FormControl, Select } from '@mui/material';
 import { useForm, FormProvider } from "react-hook-form";
 import { useEffect } from 'react';
+import { Mixpanel } from '../../mixpanel';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+
+dayjs.extend(utc);
 
 const RegisterModal = (props) => {
   // eslint-disable-next-line react/prop-types
@@ -15,7 +20,18 @@ const RegisterModal = (props) => {
   const { register, handleSubmit, setValue } = formMethods;
 
   const onSubmit = (data) => {
-    console.log('register >>> ', data);
+    // mixpanel - sign_up_completed
+    Mixpanel.track(
+      'sign_up_completed',
+      {
+        user_email: data.registerEmail,
+        created_date: dayjs().utc().format(),
+        signup_method: 'Email',
+        user_phone: data.registerPhone,
+        user_gender: data.registerGender,
+      }
+    );
+
     handleLogin();
   }
 

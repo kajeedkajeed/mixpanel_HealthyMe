@@ -11,7 +11,7 @@ const SelectedMeals = () => {
     const { _id, title, image, category, description, price } = mealItems;
 
     useEffect(() => {
-        fetchSelectMeal(`${url}${id}`)
+        fetchSelectMeal(id)
     }, [id])
 
     return (

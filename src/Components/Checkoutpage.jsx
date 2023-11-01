@@ -90,7 +90,7 @@ const Checkoutpage = () => {
     <section className='checkout-pg'>
       <button onClick={() => checkOutHandler()}>Pay Now</button>
       <table className='table table-hover caption-top'>
-        <caption>Test Cards & UPI Details for Test Payment</caption>
+        <caption>UPI Details for Payment</caption>
         <thead>
           <tr>
             <th>Payment Network</th>
@@ -131,7 +131,7 @@ const Checkoutpage = () => {
             <td> UPI</td>
             <td> <SiPhonepe/> <SiGooglepay/> <FaApplePay/> <SiPaytm/> </td>
             <td>success@razorpay</td>
-            <td>---</td>
+            <td>Any future date</td>
           </tr>
         </tbody>
       </table>
@@ -142,9 +142,9 @@ const Checkoutpage = () => {
         <div className="wrapper">
         <div className="login-container">
           <div className="close-modal" onClick={handleCloseModel}>x</div>
-          <h3>xxx</h3>
+          <h3>Payment</h3>
           <div className="sub-title">
-            <span>xxx</span>
+            <span>HealthyMe</span>
           </div>
           <FormProvider {...formMethods}>
             <form className="form-wrapper" onSubmit={handleSubmit(onSubmit)}>
@@ -152,10 +152,11 @@ const Checkoutpage = () => {
                 <TextField className="mui-TextField" type="text" label="Card Number" variant="outlined" name="cardNumber" {...register('cardNumber')}/>
                 <TextField className="mui-TextField" type="text" label="Expiry" variant="outlined" name="expiry" {...register('expiry')}/>
                 <TextField className="mui-TextField" type="text" label="Card holder name" variant="outlined" name="cardHolderName" {...register('cardHolderName')}/>
-                <TextField className="mui-TextField" type="text" label="cvv" variant="outlined" name="cvv" {...register('cvv')}/>
+                <TextField className="mui-TextField" type="text" label="CVV" variant="outlined" name="cvv" {...register('cvv')}/>
               </div>
               <div>
-                <div>Total amount: {total_amount}</div>
+                <div> <b>Total amount: {total_amount} </b> </div>
+                <br /> <br />
                 <Button className="mui-button" type="submit" variant="contained">Pay now</Button>
               </div>
             </form>
@@ -172,10 +173,12 @@ const Checkoutpage = () => {
         <div className="wrapper">
         <div className="login-container">
           <div className="close-modal" onClick={handleCloseModel}>x</div>
-          <h3>Payment Successful</h3>
+          <h2>  <b /> <b />Payment Successful <b /></h2>
+          <br /> <br />
           <h3>Total amount: {total_amount}</h3>
           <div className="sub-title">
-            <span>xxx</span>
+            <span></span>
+            <br /> <br />
           </div>
           <div>
             <Button className="mui-button" variant="contained" onClick={handleGoToCart}>Go back to cart</Button>

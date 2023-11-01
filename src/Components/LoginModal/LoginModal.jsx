@@ -62,8 +62,8 @@ const LoginContainer = (props) => {
           <FormProvider {...formMethods}>
             <form className="form-wrapper" onSubmit={handleSubmit(onSubmit)}>
               <div className="form-container">
-                <TextField className="mui-TextField" type="text" label="Email" variant="outlined" name="Email" {...register('email')}/>
-                <TextField className="mui-TextField" type="password" label="password" variant="outlined" name="password" {...register('password')}/>
+                <TextField className="mui-TextField" type="text" label="Email" variant="outlined" name="Email" {...register('email') } required/>
+                <TextField className="mui-TextField" type="password" label="password" variant="outlined" name="password" {...register('password')} required/>
               </div>
               <Button className="mui-button" type="submit" variant="contained">LOG IN</Button>
             

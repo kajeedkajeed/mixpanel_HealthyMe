@@ -57,9 +57,9 @@ const RegisterModal = (props) => {
           <FormProvider {...formMethods}>
             <form className="form-wrapper" onSubmit={handleSubmit(onSubmit)}>
               <div className="form-container">
-                <TextField className="mui-TextField" type="text" label="Email" variant="outlined" name="Email" {...register('registerEmail')}/>
-                <TextField className="mui-TextField" type="password" label="password" variant="outlined" name="password" {...register('registerPassword')}/>
-                <TextField className="mui-TextField" type="number" label="Phone" variant="outlined" name="phone" {...register('registerPhone')}/>
+                <TextField className="mui-TextField" type="text" label="Email" variant="outlined" name="Email" {...register('registerEmail')} required/>
+                <TextField className="mui-TextField" type="password" label="password" variant="outlined" name="password" {...register('registerPassword')} required/>
+                <TextField className="mui-TextField" type="number" label="Phone" variant="outlined" name="phone" {...register('registerPhone')} required/>
                 {/* <TextField className="mui-TextField" type="text" label="gender" variant="outlined" name="gender" {...register('registerGender')}/> */}
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label">Gender</InputLabel>

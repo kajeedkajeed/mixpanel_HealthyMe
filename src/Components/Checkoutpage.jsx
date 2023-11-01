@@ -11,11 +11,13 @@ import { Modal, TextField, Button } from '@mui/material'
 import { useNavigate } from 'react-router-dom';
 import { useForm, FormProvider } from "react-hook-form";
 import { useEffect } from 'react';
+import { Mixpanel } from '../mixpanel';
+
 
 
 const Checkoutpage = () => {
 
-  const { total_amount, cart, emptyCart } = useContext(AppContext);
+  const {total_items, total_amount, cart, emptyCart } = useContext(AppContext);
   const navigate = useNavigate();
   const [isPayNow, setIsPayNow] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -25,8 +27,18 @@ const Checkoutpage = () => {
   const onSubmit = (data) => {
     console.log('data of payment >>> ', data);
     console.log('cart >>> ', cart);
-
+    const allCartID = cart.map((item) => item._id);
+    
     // mixpanel - checkout_viewed
+    Mixpanel.track(
+      'checkout_viewed',
+      {
+        item_ids: allCartID,
+        total_items : total_items,
+        order_total:total_amount,
+        currency:'INR'
+      }
+    );
 
 
     setIsSuccess(true);
@@ -81,6 +93,21 @@ const Checkoutpage = () => {
 
   const handleGoToCart = () => {
     // mixpanel - purchase_completed
+    const allCartID = cart.map((item) => item._id);
+    const totalItems = cart.reduce((acc, item) => ({ ...acc, total: acc.total + item.amount }), { total: 0 });
+
+    Mixpanel.track(
+      'purchase_completed',
+      {
+        shipping_method: 'delivery',
+        medthod : 'credit',
+        total_items: totalItems.total,
+        item_ids: allCartID,
+        order_total: total_amount,
+        currency:'INR',
+        add_lifetime_value: 3500
+      }
+    );
 
     emptyCart();
     navigate("/cart");
@@ -149,10 +176,10 @@ const Checkoutpage = () => {
           <FormProvider {...formMethods}>
             <form className="form-wrapper" onSubmit={handleSubmit(onSubmit)}>
               <div className="form-container">
-                <TextField className="mui-TextField" type="text" label="Card Number" variant="outlined" name="cardNumber" {...register('cardNumber')}/>
-                <TextField className="mui-TextField" type="text" label="Expiry" variant="outlined" name="expiry" {...register('expiry')}/>
-                <TextField className="mui-TextField" type="text" label="Card holder name" variant="outlined" name="cardHolderName" {...register('cardHolderName')}/>
-                <TextField className="mui-TextField" type="text" label="CVV" variant="outlined" name="cvv" {...register('cvv')}/>
+                <TextField className="mui-TextField" type="text" label="Card Number" variant="outlined" name="cardNumber" {...register('cardNumber')} required />
+                <TextField className="mui-TextField" type="text" label="Expiry" variant="outlined" name="expiry" {...register('expiry')} required/>
+                <TextField className="mui-TextField" type="text" label="Card holder name" variant="outlined" name="cardHolderName" {...register('cardHolderName')} required/>
+                <TextField className="mui-TextField" type="text" label="CVV" variant="outlined" name="cvv" {...register('cvv')} required/>
               </div>
               <div>
                 <div> <b>Total amount: {total_amount} </b> </div>
@@ -173,7 +200,7 @@ const Checkoutpage = () => {
         <div className="wrapper">
         <div className="login-container">
           <div className="close-modal" onClick={handleCloseModel}>x</div>
-          <h2>  <b /> <b />Payment Successful <b /></h2>
+          <h2><b /> Payment Successful <b /></h2>
           <br /> <br />
           <h3>Total amount: {total_amount}</h3>
           <div className="sub-title">

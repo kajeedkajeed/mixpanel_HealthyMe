@@ -3,10 +3,28 @@ import { AppContext } from './Context'
 import AmountButtons from './AmountButtons';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Box, Card, CardActionArea, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
+import { Mixpanel } from '../mixpanel';
 
 const CartItems = ({ _id, title, price, image, amount }) => {
   
-  const { removeMeal, increaseAmount, decreaseAmount } = useContext(AppContext);
+  const { cart, total_amount, removeMeal, increaseAmount, decreaseAmount } = useContext(AppContext);
+
+
+  const onRemoveCartItem = (id) => {
+    // console.log('cart >>> ', cart);
+    // console.log('cart item >>> ', )
+    const cartItem = cart.find(item => item._id === id);
+    // mixpanel - item_removed
+    Mixpanel.track(
+      'item_removed',
+      {
+        item_ids: id,
+        total_items: cartItem.amount,
+        order_total: total_amount,
+        currency:'INR'
+      }
+    );
+  };
 
   return (
     <section className='all-cart-items'>
@@ -35,7 +53,7 @@ const CartItems = ({ _id, title, price, image, amount }) => {
               <AmountButtons _id={_id} amount={amount} increaseAmount={increaseAmount} decreaseAmount={decreaseAmount} />
             </CardActions>
             <CardActions>
-              <DeleteIcon color='error'  onClick={() => { removeMeal(_id) }} />
+              <DeleteIcon color='error'  onClick={() => {onRemoveCartItem(_id); removeMeal(_id); }} />
             </CardActions>
           </Box>
         </CardActionArea>

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { AppContext } from './Context'
 import { Link } from 'react-router-dom';
 import CartItems from './CartItems';
@@ -7,10 +7,32 @@ import { BsCart4 } from 'react-icons/bs'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { Button } from '@mui/material';
 import SocialMedia from './SocialMedia';
+import { Mixpanel } from '../mixpanel';
 
 const Cart = () => {
-
   const { cart, clearCart, total_amount } = useContext(AppContext);
+
+  const handleCartViewed = () => {
+    const allCartID = cart.map((item) => item._id);
+    const totalItems = cart.reduce((acc, item) => ({ ...acc, total: acc.total + item.amount }), { total: 0 });
+
+    // mixpanel cart_viewed
+    Mixpanel.track(
+      'cart_viewed',
+      {
+        item_ids: allCartID,
+        total_items: totalItems?.total,
+        order_total: total_amount,
+        currency: 'INR'
+      }
+   );
+
+  };
+
+  useEffect(() => {
+    handleCartViewed();
+  }, []);
+
   if (cart.length < 1) {
     return <section className='empty-cart-items'>
       <div className='empty-title'>

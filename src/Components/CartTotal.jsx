@@ -9,14 +9,14 @@ import RegisterModal from './RegisterModal/RegisterModal';
 import { Mixpanel } from '../mixpanel';
 
 const CartTotal = () => {
-  const { total_amount, total_items, loginWithRedirect, currentUser, logout } = useContext(AppContext);
+  const { total_amount, total_items, loginWithRedirect, currentUser, logout, generateCurrentUser } = useContext(AppContext);
   const [openModal, setOpenModal] = useState(false);
   const [openRegisterModal, setOpenRegisterModal] = useState(false);
 
   const handleGoToLogin = () => {
     setOpenModal(true);
     setOpenRegisterModal(false);
-
+ // mixpanel - login_started
     Mixpanel.track(
       'login_started',
       {
@@ -52,6 +52,12 @@ const CartTotal = () => {
 
   }
 
+  const handleLogout = () => {
+    console.log('logout');
+    Mixpanel.reset();
+    generateCurrentUser(null);
+  }
+
   return (
     <div>
       <article className='cart-bill'>
@@ -63,7 +69,7 @@ const CartTotal = () => {
             <Link to='/checkout'>
               <button className='btn-checkout btn-pymnt'>Checkout</button>
             </Link>
-            <PersonRemoveIcon className='btn-logout-icon' onClick={() => logout({ returnTo: window.location.origin })} />
+            <PersonRemoveIcon className='btn-logout-icon' onClick={handleLogout} />
           </div> :
           <button className='btn-checkout btn-login' onClick={handleGoToLogin}> < PersonAddIcon />Login to Checkout</button>
         }

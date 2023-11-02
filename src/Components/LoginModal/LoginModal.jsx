@@ -24,7 +24,7 @@ const LoginContainer = (props) => {
     --------
      - mixpanel identify
      - mixpanel.people.set
-     - mixpanel track >>> login_method
+     - mixpanel track >>> login_completed,login_method
     */
     Mixpanel.identify(data.email);
     Mixpanel.track(

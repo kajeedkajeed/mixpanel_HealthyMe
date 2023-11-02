@@ -49,7 +49,7 @@ const Filters = () => {
 
     return (
         <section className='filter-section'>
-            <div style={{ background: 'red', width: '100%', display: 'flex', justifyContent: 'center' }}>
+            <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
                 <img style={{ width: '100%', minHeight: 450 }} src={meal1} alt="meal1" />
                 <div style={{ position: 'absolute', left: 'calc(50% - 60px)', top: '150px' }} className="meal-title">
                     Meals

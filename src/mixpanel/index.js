@@ -1,5 +1,5 @@
 import mixpanel from 'mixpanel-browser';
-mixpanel.init('44689763cb96bd2deae85e9c36d5d3a4', { debug: true });
+mixpanel.init('17c39ca113944333d3ec43f01174252d', { debug: true });
 
 let env_check = true;
 

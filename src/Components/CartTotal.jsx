@@ -54,8 +54,8 @@ const CartTotal = () => {
 
   const handleLogout = () => {
     console.log('logout');
-    Mixpanel.reset();
     generateCurrentUser(null);
+    Mixpanel.reset();
   }
 
   return (

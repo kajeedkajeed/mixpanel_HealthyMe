@@ -28,7 +28,6 @@ function App() {
      * mixpanel - global properties
      * mixpanel.register >>> platform / user_location
      */
-
     Mixpanel.register({
       'platform': 'Web',
       'user_location': '13.7218203,100.5633786',

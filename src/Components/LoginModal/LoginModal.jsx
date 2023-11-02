@@ -6,6 +6,7 @@ import './loginModal.css';
 import { useForm, FormProvider } from "react-hook-form";
 import { useEffect } from 'react';
 import { Mixpanel } from '../../mixpanel';
+import mixpanel from 'mixpanel-browser';
 
 const LoginContainer = (props) => {
   // eslint-disable-next-line react/prop-types
@@ -26,7 +27,11 @@ const LoginContainer = (props) => {
      - mixpanel.people.set
      - mixpanel track >>> login_completed,login_method
     */
-    Mixpanel.identify(data.email);
+    Mixpanel.identify(mixpanel.cookie.props.distinct_id);
+    Mixpanel.people.set({
+      name: data.email,
+      $email: data.email,
+    });
     Mixpanel.track(
       'login_completed',
       {

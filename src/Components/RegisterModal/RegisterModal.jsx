@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import { AppContext } from '../Context'
 import { Modal } from '@mui/material'
 import { useNavigate } from 'react-router-dom';
-import '../LoginModal/LoginModal.css'
+import './registerModal.css';
 import { TextField, Button, InputLabel, MenuItem, FormControl, Select } from '@mui/material';
 import { useForm, FormProvider } from "react-hook-form";
 import { useEffect } from 'react';

@@ -28,11 +28,7 @@ const LoginContainer = (props) => {
      - mixpanel.people.set
      - mixpanel track >>> login_completed,login_method
     */
-    Mixpanel.identify(uuidv4());
-    Mixpanel.people.set({
-      name: data.email,
-      $email: data.email,
-    });
+   
     Mixpanel.track(
       'login_completed',
       {

@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import React, { useContext, useState } from 'react'
 import { AppContext } from '../Context'
 import { Modal } from '@mui/material'
@@ -21,6 +22,13 @@ const RegisterModal = (props) => {
 
   const onSubmit = (data) => {
     // mixpanel - sign_up_completed
+    Mixpanel.identify(uuidv4());
+    Mixpanel.people.set({
+      name: data.registerEmail,
+      $email: data.registerEmail,
+      user_phone: data.registerPhone,
+      user_gender: data.registerGender,
+    });
     Mixpanel.track(
       'sign_up_completed',
       {

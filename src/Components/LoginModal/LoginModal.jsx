@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import React, { useContext, useState } from 'react'
 import { AppContext } from '../Context'
 import { Modal, TextField, Button } from '@mui/material'
@@ -27,7 +28,7 @@ const LoginContainer = (props) => {
      - mixpanel.people.set
      - mixpanel track >>> login_completed,login_method
     */
-    Mixpanel.identify(mixpanel.cookie.props.distinct_id);
+    Mixpanel.identify(uuidv4());
     Mixpanel.people.set({
       name: data.email,
       $email: data.email,
